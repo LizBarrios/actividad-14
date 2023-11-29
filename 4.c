@@ -14,12 +14,11 @@
     7.- GENERAR ARCHIVO TEXTO
     8.- EMPAQUETAR
     0.- SALIR
-    BRL_act14_1_932
+    DRR_act14_1_932
 */
 
 #include <stdbool.h>
 #include "BR.h"
-#define N_AUTO 1
 
 int menu(void);
 void LeerNombreArchivo(char nomArchivo[]);
@@ -39,17 +38,15 @@ int main()
 {
     srand(time(NULL));
     int op;
-    int nPers = 0;
+    int NumReg = 0;
     int ordenado = 0;
     char nomArchivo[15];
-
     int N = contarRegArch("datos");
     N *= 1.25;
 
     Tindice indice[N];
-    cargarIndice(indice, &nPers);
+    cargarIndice(indice, &NumReg);
 
-    system("CLS");
     do
     {
         op = menu();
@@ -57,23 +54,23 @@ int main()
         switch (op)
         {
         case 1:
-            AgregarReg(indice, &nPers, &ordenado);
+            AgregarReg(indice, &NumReg, &ordenado);
             break;
 
         case 2:
-            EliminarReg(indice, &nPers, ordenado);
+            EliminarReg(indice, &NumReg, ordenado);
             break;
         case 3:
-            BuscarReg(indice, nPers, ordenado);
+            BuscarReg(indice, NumReg, ordenado);
             break;
         case 4:
-            ordenarReg(indice, nPers, &ordenado);
+            ordenarReg(indice, NumReg, &ordenado);
             break;
         case 5:
-            ImprimirArchiboBin(indice, nPers, 0);
+            ImprimirArchiboBin(indice, NumReg, 0);
             break;
         case 6:
-            ImprimirArchiboBin(indice, nPers, 1);
+            ImprimirArchiboBin(indice, NumReg, 1);
             break;
         case 7:
 
@@ -81,15 +78,15 @@ int main()
 
             if (validarnumeros("1 - Archivo\n2 - Indice\n\nElija una opcion: ", 1, 2) == 1)
             {
-                escrArchTXT(nomArchivo, indice, nPers, 0);
+                escrArchTXT(nomArchivo, indice, NumReg, 0);
             }
             else
             {
-                escrArchTXT(nomArchivo, indice, nPers, 1);
+                escrArchTXT(nomArchivo, indice, NumReg, 1);
             }
             break;
         case 8:
-            empaquetar(indice, &nPers);
+            empaquetar(indice, &NumReg);
             break;
         }
 
@@ -102,7 +99,7 @@ int main()
 int menu()
 {
     int op;
-    printf("\n   M   E   N   U \n");
+    printf("\n-------MENU------- \n");
     printf("1.- AGREGAR REGISTRO \n");
     printf("2.- ELIMINAR REGISTRO \n");
     printf("3.- BUSCAR REGISTRO \n");
@@ -202,7 +199,6 @@ void ImprimirArchiboBin(Tindice indice[], int n, int ordenado)
     fclose(fa);
 }
 
-
 void ImprimirReg(TWrkr pers)
 {
     printf("STATUS: ");
@@ -227,7 +223,6 @@ void ImprimirReg(TWrkr pers)
     printf("%s\n", pers.sex);
 }
 
-// Lee el nombre de un archivo de texto especificado.
 void LeerNombreArchivo(char nomArchivo[])
 {
     do
@@ -336,7 +331,7 @@ bool cargarIndice(Tindice indice[], int *n)
 int contarRegArch(char nomArchivo[])
 {
     int cont;
-    char fileName[50];
+    char NomArchi[50];
     char cmd[50];
 
     system("gcc Tamano_Archivo.c -o Tamano_Archivo");

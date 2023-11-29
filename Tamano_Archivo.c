@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("No se encontrO el archivo \"%s.dat\" \n", argv[1]);
+        printf("No se encontro el archivo \"%s.dat\" \n", argv[1]);
         system("PAUSE");
     }
 
